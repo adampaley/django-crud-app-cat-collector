@@ -1,5 +1,6 @@
 # imports
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Cat 
 
 # view functions
@@ -22,6 +23,18 @@ def about(request):
 #     Cat('Fancy', 'bombay', 'Happy fluff ball.', 4),
 #     Cat('Bonk', 'selkirk rex', 'Meows loudly.', 6)
 # ]
+
+class CatCreate(CreateView):
+    model = Cat
+    fields = '__all__'
+
+class CatUpdate(UpdateView):
+    model = Cat 
+    fields = ['breed', 'description', 'age']
+
+class CatDelete(DeleteView):
+    model = Cat
+    success_url = '/cats/'
 
 def cat_index(request):
     cats = Cat.objects.all() 
