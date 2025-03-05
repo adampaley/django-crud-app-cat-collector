@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
 from django.contrib.auth.models import User 
+from datetime import date
 
 MEALS = (
      ('B', 'Breakfast'),
@@ -29,6 +29,9 @@ class Cat(models.Model):
     toys = models.ManyToManyField(Toy)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def fed_for_today(self):
+         return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)
+    
     def __str__(self):
             return self.name
     
