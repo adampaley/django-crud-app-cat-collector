@@ -118,3 +118,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
+
+def catch_all(request, remaining_path):
+    return redirect('home')
